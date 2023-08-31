@@ -8,7 +8,7 @@ const handleCategory = async () => {
         const div = document.createElement("div");
         div.innerHTML = `
             
-            <a class="tab">${category.category}</a>
+            <a onclick="handleLoadContent('${category.category_id}')" class="tab">${category.category}</a>
             `;
         tabContainer.appendChild(div);
       });
@@ -16,4 +16,16 @@ const handleCategory = async () => {
     console.log(data.data);
     
 };
+
+const handleLoadContent = async (categoryId) => {
+    console.log(categoryId);
+    const response = await fetch(
+      `https://openapi.programming-hero.com/api/videos/category/${categoryId}`
+    );
+    const data = await response.json();
+    console.log(data.data)
+}
+
+
+
 handleCategory();
