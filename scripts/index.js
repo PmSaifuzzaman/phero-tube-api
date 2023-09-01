@@ -9,7 +9,7 @@ const handleCategory = async () => {
     const div = document.createElement("div");
     div.innerHTML = `
             
-            <a onclick="handleLoadContent('${category.category_id}')" class="tab">${category.category}</a>
+            <a onclick="handleLoadContent('${category.category_id}')" class="tab btn mr-3">${category.category}</a>
             `;
     tabContainer.appendChild(div);
   });
@@ -32,9 +32,9 @@ const handleLoadContent = async (categoryId) => {
     console.log(content);
     const div = document.createElement("div");
     div.innerHTML = `
-    <div class="card bg-base-100 shadow-xl">
+    <div class="card bg-base-100 shadow-xl h-96">
     <figure>
-      <img
+      <img class="w-full"
         src=${content?.thumbnail}
         alt="Shoes"
       />
