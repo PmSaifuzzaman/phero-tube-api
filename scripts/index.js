@@ -38,13 +38,13 @@ const handleLoadContent = async (categoryId) => {
 
   const cardContainer = document.getElementById("card-container");
 
-cardContainer.innerHTML = "";
+  cardContainer.innerHTML = "";
 
   // no data messege
   const noContentMessage = document.getElementById("no-content-message");
   if (data.data.length === 0) {
     noContentMessage.classList.remove("hidden");
-  }else{
+  } else {
     data.data?.forEach((content) => {
       console.log(content);
       const div = document.createElement("div");
@@ -78,9 +78,8 @@ cardContainer.innerHTML = "";
               <h6>${content?.authors[0].profile_name}</h6>
               
             </div>
-            ${
-              content?.authors[0].verified
-                ? `
+            ${content?.authors[0].verified
+          ? `
                 <div class="blue-tik">
                   <img
                     src="./images/Verified_Badge.svg.png"
@@ -89,8 +88,8 @@ cardContainer.innerHTML = "";
                   />
                 </div>
               `
-                : ""
-            }
+          : ""
+        }
           </div>
           
         </div>
@@ -98,7 +97,7 @@ cardContainer.innerHTML = "";
     </div>
           
           `;
-  
+
       cardContainer.appendChild(div);
     });
     noContentMessage.classList.add("hidden");
