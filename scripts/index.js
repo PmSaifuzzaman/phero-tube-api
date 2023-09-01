@@ -1,3 +1,11 @@
+// Blog page
+const blogButton = document.getElementById("blog-button");
+blogButton.addEventListener("click", () => {
+  // Redirect the user to the "blog.html" page
+  window.location.href = "blog.html";
+});
+
+
 const handleCategory = async () => {
   const response = await fetch(
     "https://openapi.programming-hero.com/api/videos/categories"
@@ -25,10 +33,14 @@ const handleLoadContent = async (categoryId) => {
   const data = await response.json();
   // console.log(data.data)
 
-  const cardContainer = document.getElementById("card-container");
-  cardContainer.innerHTML = "";
+  // Get sort by view data
+  const sortButton = document.getElementById("sort-by-view-button");
 
-  // no data
+  const cardContainer = document.getElementById("card-container");
+
+cardContainer.innerHTML = "";
+
+  // no data messege
   const noContentMessage = document.getElementById("no-content-message");
   if (data.data.length === 0) {
     noContentMessage.classList.remove("hidden");
@@ -92,7 +104,8 @@ const handleLoadContent = async (categoryId) => {
     noContentMessage.classList.add("hidden");
   }
 
-  
+
+
 };
 
 
