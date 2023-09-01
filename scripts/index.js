@@ -28,62 +28,75 @@ const handleLoadContent = async (categoryId) => {
   const cardContainer = document.getElementById("card-container");
   cardContainer.innerHTML = "";
 
-  data.data?.forEach((content) => {
-    console.log(content);
-    const div = document.createElement("div");
-    div.innerHTML = `
-    <div class="card bg-base-100 shadow-xl h-96">
-    <figure>
-      <img class="w-full"
-        src=${content?.thumbnail}
-        alt="Shoes"
-      />
-    </figure>
-    <div class="card-body">
-      <h2 class="card-title">
-      ${content?.title}
-      </h2>
-      <p>
-      ${content?.others.views}  views
-      </p>
-      <div class="card-footer flex justify-between mt-8">
-        <div class="flex gap-3 items-center">
-          <div>
-            <div class="avatar online">
-              <div class="w-14 rounded-full">
-                <img
-                src=${content?.authors[0].profile_picture}
-                />
+  // no data
+  const noContentMessage = document.getElementById("no-content-message");
+  if (data.data.length === 0) {
+    noContentMessage.classList.remove("hidden");
+  }else{
+    data.data?.forEach((content) => {
+      console.log(content);
+      const div = document.createElement("div");
+      div.innerHTML = `
+      <div class="card bg-base-100 shadow-xl h-96">
+      <figure>
+        <img class="w-full"
+          src=${content?.thumbnail}
+          alt="Shoes"
+        />
+      </figure>
+      <div class="card-body">
+        <h2 class="card-title">
+        ${content?.title}
+        </h2>
+        <p>
+        ${content?.others.views}  views
+        </p>
+        <div class="card-footer flex justify-between mt-8">
+          <div class="flex gap-3 items-center">
+            <div>
+              <div class="avatar online">
+                <div class="w-14 rounded-full">
+                  <img
+                  src=${content?.authors[0].profile_picture}
+                  />
+                </div>
               </div>
             </div>
+            <div>
+              <h6>${content?.authors[0].profile_name}</h6>
+              
+            </div>
+            ${
+              content?.authors[0].verified
+                ? `
+                <div class="blue-tik">
+                  <img
+                    src="./images/Verified_Badge.svg.png"
+                    alt="Verified Icon"
+                    class="h-5 w-5"
+                  />
+                </div>
+              `
+                : ""
+            }
           </div>
-          <div>
-            <h6>${content?.authors[0].profile_name}</h6>
-            
-          </div>
-          ${
-            content?.authors[0].verified
-              ? `
-              <div class="blue-tik">
-                <img
-                  src="./images/Verified_Badge.svg.png"
-                  alt="Verified Icon"
-                  class="h-5 w-5"
-                />
-              </div>
-            `
-              : ""
-          }
+          
         </div>
-        
       </div>
     </div>
-  </div>
-        
-        `;
+          
+          `;
+  
+      cardContainer.appendChild(div);
+    });
+    noContentMessage.classList.add("hidden");
+  }
 
-    cardContainer.appendChild(div);
-  });
+  
 };
 
+
+
+
 handleCategory();
+handleLoadContent('1000');
